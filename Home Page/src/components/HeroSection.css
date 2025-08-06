@@ -1,0 +1,67 @@
+.hero-container {
+  position: relative;
+  z-index: 5;
+  margin-top: 10vh;
+  color: white;
+  padding: 0 2rem;
+}
+.hbox{
+  height: 700px;
+  width: 900px;
+}
+.gradient-heading {
+  font-size: 3.8rem;
+  font-weight: 900;
+  font-family: 'Orbitron', sans-serif;
+  background: linear-gradient(90deg, #b721ff, #ff0080, #ffae00, #ff0080, #b721ff);
+  background-size: 300% auto;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: rainbowFlow 6s ease-in-out infinite;
+  line-height: 1.2;
+}
+
+@keyframes rainbowFlow {
+  0% { background-position: 0% center; }
+  50% { background-position: 100% center; }
+  100% { background-position: 0% center; }
+}
+
+.subtext {
+  font-size: 1.1rem;
+  margin: 1.5rem 0;
+  color: #ffffff;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.btn {
+  font-size: 1rem;
+  padding: 0.75rem 2rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  font-family: 'Orbitron', sans-serif;
+  transition: all 0.3s ease;
+}
+
+.join {
+  background: linear-gradient(90deg, #ff00cc, #ffae00);
+  color: white;
+}
+
+.explore {
+  background: transparent;
+  border: 2px solid #ffae00;
+  color: white;
+}
+
+.btn:hover {
+  transform: scale(1.05);
+}
