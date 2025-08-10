@@ -1,0 +1,107 @@
+.events-section {
+  padding: 40px;
+  text-align: center;
+}
+
+/* White glowing heading */
+.rainbow-heading {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 30px;
+  color: white;
+  animation: whiteGlow 2.5s ease-in-out infinite;
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.7),
+               0 0 16px rgba(255, 255, 255, 0.6),
+               0 0 24px rgba(255, 255, 255, 0.5);
+}
+
+.events-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 50px;
+}
+
+.event-card {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 20px;
+  border-radius: 15px;
+  text-align: center;
+  width: 290px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.event-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+}
+
+.event-image {
+  width: 250px;
+  height: 300px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 18px;
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+
+.event-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+/* White glowing text */
+.rainbow-text {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: white;
+  animation: whiteGlow 2.5s ease-in-out infinite;
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.7),
+               0 0 16px rgba(255, 255, 255, 0.6),
+               0 0 24px rgba(255, 255, 255, 0.5);
+}
+
+/* glowing fade in/out animation */
+@keyframes whiteGlow {
+  0%, 100% {
+    text-shadow: 0 0 4px rgba(255,255,255,0.5),
+                 0 0 8px rgba(255,255,255,0.5),
+                 0 0 12px rgba(255,255,255,0.4);
+    opacity: 0.8;
+  }
+  50% {
+    text-shadow: 0 0 8px rgba(255,255,255,0.8),
+                 0 0 16px rgba(255,255,255,0.7),
+                 0 0 24px rgba(255,255,255,0.6);
+    opacity: 1;
+  }
+}
+
+/* Tablet responsiveness */
+@media (max-width: 880px) {
+  .rainbow-heading { font-size: 1.8rem; }
+  .rainbow-text { font-size: 1rem; }
+  .events-container { gap: 30px; }
+  .event-card { width: 260px; }
+  .event-image { width: 220px; height: 260px; }
+}
+
+/* Mobile responsiveness */
+@media (max-width: 520px) {
+  .events-section { padding: 30px 15px; }
+  .rainbow-heading { font-size: 1.5rem; }
+  .rainbow-text { font-size: 0.95rem; letter-spacing: 0.5px; }
+  .events-container { flex-direction: column; gap: 20px; }
+  .event-card { width: 100%; max-width: 280px; }
+  .event-image { width: 100%; height: auto; aspect-ratio: 5/6; }
+}
