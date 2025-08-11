@@ -4,6 +4,7 @@ import VkshaTeam from "@/components/VkshaTeam";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import { ArrowRight, Sparkles, Rocket, Users } from "lucide-react";
+import Timeline from "@/components/Timeline";
 
 export default function Home() {
   return (
@@ -11,7 +12,8 @@ export default function Home() {
       <div className="animate-in fade-in duration-1000">
         <Hero />
         <VkshaTeam />
-        
+        <Timeline />
+
         {/* Quick Navigation Section */}
         <section className="px-4 lg:px-8 py-16">
           <div className="max-w-7xl mx-auto">

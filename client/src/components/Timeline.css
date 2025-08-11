@@ -1,0 +1,169 @@
+/* ---------- CoreTeam.css (full file) ---------- */
+
+.core-team-section {
+  padding: 80px 20px;
+  text-align: center;
+  color: white;
+}
+
+/* Title + subtitle */
+.rainbow-heading {
+  font-size: 2.4rem;
+  margin: 0 0 8px;
+  font-weight: 700;
+  color: white;
+  animation: whiteGlow 2.5s ease-in-out infinite;
+  text-shadow: 0 0 8px rgba(255,255,255,0.7),
+               0 0 16px rgba(255,255,255,0.6),
+               0 0 24px rgba(255,255,255,0.5);
+}
+
+.subtitle {
+  color: rgba(255,255,255,0.68);
+  margin-bottom: 48px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+/* ---------- Horizontal Timeline (default for >= 476px) ---------- */
+.timeline {
+  position: relative;
+  width: 88%;
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 160px;
+  box-sizing: border-box;
+}
+
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: 2.5%;
+  right: 2.5%;
+  top: 50%;
+  height: 2px;
+  background: rgba(255,255,255,0.14);
+  transform: translateY(-50%);
+  border-radius: 2px;
+}
+
+/* end dots on the horizontal line */
+.end-dot {
+  position: absolute;
+  top: 50%;
+  width: 10px;
+  height: 10px;
+  background: rgba(255,255,255,0.95);
+  border-radius: 50%;
+  transform: translateY(-50%);
+}
+.end-dot.left  { left: 2.5%; transform: translate(-50%, -50%); }
+.end-dot.right { right: 2.5%; transform: translate(50%, -50%); }
+
+/* timeline points */
+.timeline-point {
+  position: relative;
+  flex: 1 1 0;
+  max-width: 160px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.timeline-point::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 6px;
+  height: 6px;
+  background: rgba(255,255,255,0.9);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+}
+
+/* connector vertical bits for desktop */
+.connector {
+  position: absolute;
+  left: 50%;
+  width: 2px;
+  background: rgba(255,255,255,0.32);
+  transform: translateX(-50%);
+}
+.connector.up { top: calc(50% - 50px); height: 50px; }
+.connector.down { top: 50%; height: 50px; }
+
+.connector .circle {
+  position: absolute;
+  left: 50%;
+  width: 12px;
+  height: 12px;
+  background: white;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 0 2px rgba(255,255,255,0.14);
+}
+.connector.up .circle { top: 0; transform: translate(-50%, -50%); }
+.connector.down .circle { bottom: 0; transform: translate(-50%, 50%); }
+
+/* year positions in horizontal layout */
+.timeline-point.top .year {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: calc(50% - 50px - 40px);
+  font-weight: 700;
+  z-index: 3;
+}
+.timeline-point.bottom .year {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: calc(50% + 50px + 20px);
+  font-weight: 700;
+  z-index: 3;
+}
+
+/* rainbow / glow for year text */
+.rainbow-text {
+  font-size: 1.2rem;
+  color: white;
+  animation: whiteGlow 2.5s ease-in-out infinite;
+  text-shadow: 0 0 8px rgba(255,255,255,0.7),
+               0 0 16px rgba(255,255,255,0.6),
+               0 0 24px rgba(255,255,255,0.5);
+  letter-spacing: 1px;
+}
+
+/* glowing fade in/out */
+@keyframes whiteGlow {
+  0%, 100% {
+    text-shadow: 0 0 4px rgba(255,255,255,0.5),
+                 0 0 8px rgba(255,255,255,0.5),
+                 0 0 12px rgba(255,255,255,0.4);
+    opacity: 0.8;
+  }
+  50% {
+    text-shadow: 0 0 8px rgba(255,255,255,0.8),
+                 0 0 16px rgba(255,255,255,0.7),
+                 0 0 24px rgba(255,255,255,0.6);
+    opacity: 1;
+  }
+}
+
+/* Tablet adjustments */
+@media (max-width: 880px) {
+  .rainbow-heading { font-size: 2rem; }
+  .rainbow-text { font-size: 1rem; }
+  .timeline { height: 200px; }
+  .timeline-point { max-width: 120px; }
+  .connector.up { top: calc(50% - 70px); height: 70px; }
+  .connector.down { height: 70px; }
+  .timeline-point.top .year { top: calc(50% - 70px - 26px); }
+  .timeline-point.bottom .year { top: calc(50% + 70px + 8px); }
+}
+
