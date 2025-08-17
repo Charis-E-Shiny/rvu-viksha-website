@@ -32,6 +32,7 @@ function Router() {
     <>
       <ScrollToTop /> {/* this ensures scroll resets on every route change */}
       <Switch>
+        {/* <br/> */}
         <Route path="/" component={Home} />
         <Route path="/projects" component={Projects} />
         <Route path="/events" component={Events} />

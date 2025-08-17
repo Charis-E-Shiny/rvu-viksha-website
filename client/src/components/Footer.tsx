@@ -1,59 +1,51 @@
-import { Code, Instagram, Linkedin, Github } from "lucide-react";
+import { Instagram, Linkedin, Github } from "lucide-react";
 
 export default function Footer() {
   return (
-    <footer className="px-4 lg:px-8 py-16 border-t border-gray-800">
-      <div className="max-w-7xl mx-auto text-center">
-        <div className="flex items-center justify-center space-x-4 mb-6">
-          <div className="w-12 h-12 bg-gradient-to-br from-purple-600/20 to-purple-800/40 backdrop-blur-sm border border-purple-500/30 rounded-lg flex items-center justify-center overflow-hidden">
+    <footer className="relative bg-transparent backdrop-blur-md border-t border-purple-500/20 px-4 py-10">
+      <div className="max-w-4xl mx-auto flex flex-col items-center text-center space-y-8">
+        
+        {/* Logo & Name */}
+        <div className="flex flex-col items-center space-y-3">
+          <div className="w-50 h-50  border border-purple-400/40 p-1 bg-purple-900/20 shadow-lg shadow-purple-500/20 overflow-hidden" style={{borderRadius:"20px"}}>
             <img 
-              src="/attached_assets/image_1754416683050.png" 
+              src="/Public/assets/Viksha2.jpg" 
               alt="VIKSHA Logo"
-              className="w-8 h-auto filter brightness-0 invert opacity-90"
+              style={{height:"70px",width:"100px",borderRadius:"20px"}}
             />
           </div>
-          <div className="flex items-center space-x-3">
-            <div>
-              <h3 className="text-xl font-bold">VIKSHA CODING CLUB</h3>
-              <p className="text-sm text-gray-400">OF RVU</p>
-            </div>
-            <img 
-              src="/attached_assets/image_1754416655790.png" 
-              alt="RV University Logo"
-              className="h-6 w-auto opacity-60"
-            />
-          </div>
+          <h3 className="text-2xl font-bold bg-gradient-to-r from-purple-300 to-pink-200 bg-clip-text text-transparent">
+            VIKSHA CODING CLUB
+          </h3>
+          <p className="text-sm text-gray-400 tracking-wide">OF RVU</p>
         </div>
-        
-        <div className="grid md:grid-cols-3 gap-8 mb-8">
-          <div>
-            <h4 className="font-semibold mb-3">Contact Information</h4>
-            <p className="text-gray-400 text-sm">RV University, Bengaluru</p>
-            <p className="text-gray-400 text-sm">Karnataka, India</p>
-          </div>
-          <div>
-            <h4 className="font-semibold mb-3">Email</h4>
-            <p className="text-gray-400 text-sm">contact@vikshacodingclub.org</p>
-            <p className="text-gray-400 text-sm">info@vikshacodingclub.org</p>
-          </div>
-          <div>
-            <h4 className="font-semibold mb-3">Follow Us</h4>
-            <div className="flex justify-center space-x-4">
-              <a href="#" className="text-gray-400 hover:text-purple-400 transition-colors">
-                <Instagram size={24} />
-              </a>
-              <a href="#" className="text-gray-400 hover:text-purple-400 transition-colors">
-                <Linkedin size={24} />
-              </a>
-              <a href="#" className="text-gray-400 hover:text-purple-400 transition-colors">
-                <Github size={24} />
-              </a>
-            </div>
-          </div>
+
+        {/* Social Links */}
+        <div className="flex space-x-5">
+          {[
+            { icon: Instagram, link: "#" },
+            { icon: Linkedin, link: "https://www.linkedin.com/company/viksha/" },
+            { icon: Github, link: "#" }
+          ].map(({ icon: Icon, link }, i) => (
+            <a 
+              key={i} 
+              href={link} 
+              className="p-3 rounded-full border border-purple-500/30 bg-purple-900/20 hover:bg-purple-700/30 hover:scale-110 transition-all duration-300 shadow-md shadow-purple-500/20"
+            >
+              <Icon size={20} className="text-purple-300" />
+            </a>
+          ))}
         </div>
-        
-        <div className="border-t border-gray-800 pt-6">
-          <p className="text-gray-400 text-sm">&copy; 2024 Vksha Coding Club of RVU. All rights reserved.</p>
+
+        {/* Contact Info */}
+        <div className="text-gray-400 text-sm space-y-1">
+          <p>RV University, Bengaluru, Karnataka, India</p>
+          <p>contact@vikshacodingclub.org | info@vikshacodingclub.org</p>
+        </div>
+
+        {/* Copyright */}
+        <div className="border-t border-purple-500/20 w-full pt-4">
+          <p className="text-gray-500 text-xs">&copy; 2024 VIKSHA Coding Club of RVU. All rights reserved.</p>
         </div>
       </div>
     </footer>
