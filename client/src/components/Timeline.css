@@ -12,10 +12,7 @@
   margin: 0 0 8px;
   font-weight: 700;
   color: white;
-  animation: whiteGlow 2.5s ease-in-out infinite;
-  text-shadow: 0 0 8px rgba(255,255,255,0.7),
-               0 0 16px rgba(255,255,255,0.6),
-               0 0 24px rgba(255,255,255,0.5);
+ 
 }
 
 .subtitle {
@@ -132,38 +129,9 @@
 .rainbow-text {
   font-size: 1.2rem;
   color: white;
-  animation: whiteGlow 2.5s ease-in-out infinite;
-  text-shadow: 0 0 8px rgba(255,255,255,0.7),
-               0 0 16px rgba(255,255,255,0.6),
-               0 0 24px rgba(255,255,255,0.5);
+  
   letter-spacing: 1px;
 }
 
 /* glowing fade in/out */
-@keyframes whiteGlow {
-  0%, 100% {
-    text-shadow: 0 0 4px rgba(255,255,255,0.5),
-                 0 0 8px rgba(255,255,255,0.5),
-                 0 0 12px rgba(255,255,255,0.4);
-    opacity: 0.8;
-  }
-  50% {
-    text-shadow: 0 0 8px rgba(255,255,255,0.8),
-                 0 0 16px rgba(255,255,255,0.7),
-                 0 0 24px rgba(255,255,255,0.6);
-    opacity: 1;
-  }
-}
-
-/* Tablet adjustments */
-@media (max-width: 880px) {
-  .rainbow-heading { font-size: 2rem; }
-  .rainbow-text { font-size: 1rem; }
-  .timeline { height: 200px; }
-  .timeline-point { max-width: 120px; }
-  .connector.up { top: calc(50% - 70px); height: 70px; }
-  .connector.down { height: 70px; }
-  .timeline-point.top .year { top: calc(50% - 70px - 26px); }
-  .timeline-point.bottom .year { top: calc(50% + 70px + 8px); }
-}
 

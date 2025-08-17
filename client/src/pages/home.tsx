@@ -1,10 +1,9 @@
 import Layout from "@/components/Layout";
 import Hero from "@/components/Hero";
 import VkshaTeam from "@/components/VkshaTeam";
-import { Button } from "@/components/ui/button";
-import { Link } from "wouter";
-import { ArrowRight, Sparkles, Rocket, Users } from "lucide-react";
 import Timeline from "@/components/Timeline";
+import { Link } from "wouter";
+import { ArrowRight, Sparkles, Rocket, Users, Terminal } from "lucide-react";
 
 export default function Home() {
   return (
@@ -14,64 +13,74 @@ export default function Home() {
         <VkshaTeam />
         <Timeline />
 
-        {/* Quick Navigation Section */}
+        {/* Explore Section */}
         <section className="px-4 lg:px-8 py-16">
           <div className="max-w-7xl mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl lg:text-4xl font-bold mb-4 bg-gradient-to-r from-white via-purple-200 to-white bg-clip-text text-transparent">
+            {/* Heading */}
+            <div className="text-center mb-12" > 
+              <h2 className="text-3xl lg:text-4xl font-bold mb-4 bg-gradient-to-r">
                 Explore Our World
               </h2>
               <p className="text-gray-300 text-lg max-w-2xl mx-auto">
-                Discover what makes VKSHA Coding Club unique - from our innovative projects to our vibrant events
+                Discover what makes VKSHA Coding Club unique — from our innovative projects to our vibrant events
               </p>
             </div>
-            
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-              <Link href="/projects">
-                <div className="group bg-gradient-to-br from-purple-900/20 to-purple-800/10 backdrop-blur-sm border border-purple-500/20 rounded-2xl p-6 hover:scale-105 transition-all duration-300 hover:shadow-2xl hover:shadow-purple-500/20 cursor-pointer">
-                  <div className="mb-4">
-                    <Rocket className="text-purple-400 group-hover:text-purple-300 transition-colors duration-300" size={32} />
-                  </div>
-                  <h3 className="text-xl font-semibold mb-2 group-hover:text-purple-300 transition-colors duration-300">Projects</h3>
-                  <p className="text-gray-400 text-sm mb-4">Explore our innovative coding projects and solutions</p>
-                  <ArrowRight className="text-purple-400 group-hover:translate-x-1 transition-transform duration-300" size={20} />
-                </div>
-              </Link>
-              
-              <Link href="/events">
-                <div className="group bg-gradient-to-br from-purple-900/20 to-purple-800/10 backdrop-blur-sm border border-purple-500/20 rounded-2xl p-6 hover:scale-105 transition-all duration-300 hover:shadow-2xl hover:shadow-purple-500/20 cursor-pointer">
-                  <div className="mb-4">
-                    <Sparkles className="text-purple-400 group-hover:text-purple-300 transition-colors duration-300" size={32} />
-                  </div>
-                  <h3 className="text-xl font-semibold mb-2 group-hover:text-purple-300 transition-colors duration-300">Events</h3>
-                  <p className="text-gray-400 text-sm mb-4">Join our workshops, hackathons, and tech talks</p>
-                  <ArrowRight className="text-purple-400 group-hover:translate-x-1 transition-transform duration-300" size={20} />
-                </div>
-              </Link>
-              
-              <Link href="/team">
-                <div className="group bg-gradient-to-br from-purple-900/20 to-purple-800/10 backdrop-blur-sm border border-purple-500/20 rounded-2xl p-6 hover:scale-105 transition-all duration-300 hover:shadow-2xl hover:shadow-purple-500/20 cursor-pointer">
-                  <div className="mb-4">
-                    <Users className="text-purple-400 group-hover:text-purple-300 transition-colors duration-300" size={32} />
-                  </div>
-                  <h3 className="text-xl font-semibold mb-2 group-hover:text-purple-300 transition-colors duration-300">Our Team</h3>
-                  <p className="text-gray-400 text-sm mb-4">Meet the passionate minds behind VKSHA</p>
-                  <ArrowRight className="text-purple-400 group-hover:translate-x-1 transition-transform duration-300" size={20} />
-                </div>
-              </Link>
-              
-              <Link href="/contact">
-                <div className="group bg-gradient-to-br from-purple-900/20 to-purple-800/10 backdrop-blur-sm border border-purple-500/20 rounded-2xl p-6 hover:scale-105 transition-all duration-300 hover:shadow-2xl hover:shadow-purple-500/20 cursor-pointer">
-                  <div className="mb-4">
-                    <div className="w-8 h-8 bg-purple-gradient rounded-lg flex items-center justify-center">
+
+            {/* Cards Grid */}
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+              {[
+                {
+                  href: "/projects",
+                  title: "Projects",
+                  desc: "Explore our innovative coding projects and solutions",
+                  Icon: Rocket,
+                },
+                {
+                  href: "/events",
+                  title: "Events",
+                  desc: "Join our workshops, hackathons, and tech talks",
+                  Icon: Sparkles,
+                },
+                {
+                  href: "/team",
+                  title: "Our Team",
+                  desc: "Meet the passionate minds behind VKSHA",
+                  Icon: Users,
+                },
+                {
+                  href: "/contact",
+                  title: "Contact",
+                  desc: "Get in touch and join our community",
+                  Icon: () => (
+                    <div className="w-8 h-8 bg-gradient-to-br from-purple-400 to-purple-600 rounded-lg flex items-center justify-center">
                       <span className="text-white font-bold">@</span>
                     </div>
+                  ),
+                },
+                {
+                  href: "/challenges",
+                  title: "Coding Challenges",
+                  desc: "Sharpen your skills with fun exercises & puzzles",
+                  Icon: Terminal,
+                },
+              ].map(({ href, title, desc, Icon }, idx) => (
+                <Link key={idx} href={href}>
+                  <div className="group bg-gradient-to-br from-purple-900/30 to-purple-800/10 backdrop-blur-md border border-white/40 rounded-2xl p-6 hover:scale-105 transition-all duration-300 hover:shadow-2xl hover:shadow-purple-500/30 cursor-pointer">
+                    <div className="mb-4">
+                      {typeof Icon === "function" && Icon.name ? (
+                        <Icon className="text-purple-400 group-hover:text-purple-300 transition-colors duration-300" size={32} />
+                      ) : (
+                        <Icon />
+                      )}
+                    </div>
+                    <h3 className="text-xl font-semibold mb-2 group-hover:text-purple-200 transition-colors duration-300">
+                      {title}
+                    </h3>
+                    <p className="text-gray-400 text-sm mb-4">{desc}</p>
+                    <ArrowRight className="text-purple-400 group-hover:translate-x-1 transition-transform duration-300" size={20} />
                   </div>
-                  <h3 className="text-xl font-semibold mb-2 group-hover:text-purple-300 transition-colors duration-300">Contact</h3>
-                  <p className="text-gray-400 text-sm mb-4">Get in touch and join our community</p>
-                  <ArrowRight className="text-purple-400 group-hover:translate-x-1 transition-transform duration-300" size={20} />
-                </div>
-              </Link>
+                </Link>
+              ))}
             </div>
           </div>
         </section>
