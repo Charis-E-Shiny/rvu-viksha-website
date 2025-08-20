@@ -12,6 +12,7 @@ import Team from "@/pages/team";
 import Contact from "@/pages/contact";
 import NotFound from "@/pages/not-found";
 import Blogs from "@/pages/blogs";
+import Quiz from "@/pages/quiz";
 
 // animation component
 import IntroAnimation from "@/components/IntroAnimation";
@@ -39,6 +40,7 @@ function Router() {
         <Route path="/team" component={Team} />
         <Route path="/blogs" component={Blogs} />
         <Route path="/contact" component={Contact} />
+        <Route path="/quiz" component={Quiz} />
         <Route component={NotFound} />
       </Switch>
     </>

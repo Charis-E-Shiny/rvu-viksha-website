@@ -58,7 +58,7 @@ export default function Home() {
                   ),
                 },
                 {
-                  href: "/challenges",
+                  href: "/quiz",
                   title: "Coding Challenges",
                   desc: "Sharpen your skills with fun exercises & puzzles",
                   Icon: Terminal,

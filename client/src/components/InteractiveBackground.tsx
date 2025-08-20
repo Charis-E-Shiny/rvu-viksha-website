@@ -1,139 +1,149 @@
-import { useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from "react";
 
-export default function InteractiveBackground() {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const mouseRef = useRef({ x: 0, y: 0 });
-  const particlesRef = useRef<Array<{
-    x: number;
-    y: number;
-    vx: number;
-    vy: number;
-    size: number;
-    opacity: number;
-  }>>([]);
+// --- Animated background that matches the WnCC IIT Bombay screenshot ---
+// Dark navy background with soft center vignette and slowly floating blue glowing dots.
+// TypeScript-friendly and Tailwind-ready. Place as a page background.
+
+type Particle = {
+  x: number;
+  y: number;
+  vx: number;
+  vy: number;
+  r: number;
+  baseA: number; // base opacity
+  phase: number; // for twinkle
+  twinkle: number; // speed of twinkle
+};
+
+export const AnimatedBackground: React.FC<{ bg?: string; glow?: string }> = ({
+  bg = "#0a192f", // dark navy
+  glow = "#00aaff", // cyan-blue glow
+}) => {
+  const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const rafRef = useRef<number | null>(null);
+  const particlesRef = useRef<Particle[]>([]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    const resizeCanvas = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+    const DPR = Math.min(2, window.devicePixelRatio || 1);
+
+    const resize = () => {
+      const { innerWidth: w, innerHeight: h } = window;
+      canvas.width = Math.floor(w * DPR);
+      canvas.height = Math.floor(h * DPR);
+      canvas.style.width = `${w}px`;
+      canvas.style.height = `${h}px`;
     };
 
-    const handleMouseMove = (e: MouseEvent) => {
-      mouseRef.current = {
-        x: e.clientX,
-        y: e.clientY
-      };
-    };
-
-    const initParticles = () => {
+    const init = () => {
+      const { width: w, height: h } = canvas;
       particlesRef.current = [];
-      const particleCount = Math.min(50, Math.floor(window.innerWidth / 30));
-      
-      for (let i = 0; i < particleCount; i++) {
+      const count = Math.min(120, Math.floor(window.innerWidth / 12));
+      for (let i = 0; i < count; i++) {
+        const r = (Math.random() * 1.8 + 0.6) * DPR;
         particlesRef.current.push({
-          x: Math.random() * canvas.width,
-          y: Math.random() * canvas.height,
-          vx: (Math.random() - 0.5) * 0.5,
-          vy: (Math.random() - 0.5) * 0.5,
-          size: Math.random() * 2 + 1,
-          opacity: Math.random() * 0.5 + 0.1
+          x: Math.random() * w,
+          y: Math.random() * h,
+          vx: (Math.random() - 0.5) * 0.18 * DPR,
+          vy: (Math.random() - 0.5) * 0.18 * DPR,
+          r,
+          baseA: Math.random() * 0.6 + 0.25,
+          phase: Math.random() * Math.PI * 2,
+          twinkle: Math.random() * 0.005 + 0.002,
         });
       }
     };
 
-    const animate = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+    const draw = () => {
+      const { width: w, height: h } = canvas;
 
-      // Create gradient from mouse position
-      const gradient = ctx.createRadialGradient(
-        mouseRef.current.x, mouseRef.current.y, 0,
-        mouseRef.current.x, mouseRef.current.y, 300
+      // Background fill
+      ctx.clearRect(0, 0, w, h);
+      ctx.fillStyle = bg;
+      ctx.fillRect(0, 0, w, h);
+
+      // Soft vignette (darker edges like the screenshot)
+      const g = ctx.createRadialGradient(
+        w / 2,
+        h / 2,
+        0,
+        w / 2,
+        h / 2,
+        Math.max(w, h) * 0.7
       );
-      gradient.addColorStop(0, 'rgba(139, 92, 246, 0.1)');
-      gradient.addColorStop(0.5, 'rgba(168, 85, 247, 0.05)');
-      gradient.addColorStop(1, 'rgba(168, 85, 247, 0)');
+      g.addColorStop(0, "rgba(0,0,0,0)");
+      g.addColorStop(1, "rgba(0,0,0,0.65)");
+      ctx.fillStyle = g;
+      ctx.fillRect(0, 0, w, h);
 
-      ctx.fillStyle = gradient;
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      // Particles
+      for (const p of particlesRef.current) {
+        // motion with gentle random drift
+        p.x += p.vx;
+        p.y += p.vy;
+        p.vx += (Math.random() - 0.5) * 0.005 * DPR;
+        p.vy += (Math.random() - 0.5) * 0.005 * DPR;
+        p.vx = Math.max(-0.25 * DPR, Math.min(0.25 * DPR, p.vx));
+        p.vy = Math.max(-0.25 * DPR, Math.min(0.25 * DPR, p.vy));
 
-      // Update and draw particles
-      particlesRef.current.forEach((particle, index) => {
-        // Mouse attraction
-        const dx = mouseRef.current.x - particle.x;
-        const dy = mouseRef.current.y - particle.y;
-        const distance = Math.sqrt(dx * dx + dy * dy);
-        
-        if (distance < 200) {
-          const force = (200 - distance) / 200 * 0.01;
-          particle.vx += dx * force * 0.001;
-          particle.vy += dy * force * 0.001;
-        }
+        // wrap around screen for seamless flow
+        if (p.x < -10) p.x = w + 10;
+        if (p.x > w + 10) p.x = -10;
+        if (p.y < -10) p.y = h + 10;
+        if (p.y > h + 10) p.y = -10;
 
-        // Update position
-        particle.x += particle.vx;
-        particle.y += particle.vy;
+        // twinkle
+        p.phase += p.twinkle;
+        const a = p.baseA * (0.7 + 0.3 * Math.sin(p.phase));
 
-        // Bounce off edges
-        if (particle.x < 0 || particle.x > canvas.width) particle.vx *= -1;
-        if (particle.y < 0 || particle.y > canvas.height) particle.vy *= -1;
-
-        // Keep particles in bounds
-        particle.x = Math.max(0, Math.min(canvas.width, particle.x));
-        particle.y = Math.max(0, Math.min(canvas.height, particle.y));
-
-        // Draw particle
         ctx.beginPath();
-        ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(139, 92, 246, ${particle.opacity})`;
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(0,170,255,${a})`;
+        ctx.shadowBlur = 12 * DPR;
+        ctx.shadowColor = glow;
         ctx.fill();
+      }
 
-        // Draw connections
-        particlesRef.current.slice(index + 1).forEach(otherParticle => {
-          const distance = Math.sqrt(
-            (particle.x - otherParticle.x) ** 2 + (particle.y - otherParticle.y) ** 2
-          );
-          
-          if (distance < 100) {
-            ctx.beginPath();
-            ctx.moveTo(particle.x, particle.y);
-            ctx.lineTo(otherParticle.x, otherParticle.y);
-            ctx.strokeStyle = `rgba(139, 92, 246, ${0.1 * (1 - distance / 100)})`;
-            ctx.lineWidth = 1;
-            ctx.stroke();
-          }
-        });
-      });
-
-      requestAnimationFrame(animate);
+      rafRef.current = requestAnimationFrame(draw);
     };
 
-    resizeCanvas();
-    initParticles();
-    animate();
+    const handleResize = () => {
+      resize();
+      init();
+    };
 
-    window.addEventListener('resize', () => {
-      resizeCanvas();
-      initParticles();
-    });
-    window.addEventListener('mousemove', handleMouseMove);
+    resize();
+    init();
+    draw();
+
+    window.addEventListener("resize", handleResize);
 
     return () => {
-      window.removeEventListener('resize', resizeCanvas);
-      window.removeEventListener('mousemove', handleMouseMove);
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+      window.removeEventListener("resize", handleResize);
     };
-  }, []);
+  }, [bg, glow]);
 
   return (
     <canvas
       ref={canvasRef}
-      className="fixed inset-0 pointer-events-none z-0"
-      style={{ background: 'transparent' }}
+      className="fixed inset-0 -z-10 pointer-events-none"
     />
   );
-}
+};
+
+// --- Demo page preview ---
+// This default export renders the background + a centered heading similar to your reference image.
+const PreviewPage: React.FC = () => {
+  return (
+    <div className="relative min-h-screen flex items-center justify-center">
+      <AnimatedBackground />
+    </div>
+  );
+};
+
+export default AnimatedBackground;
