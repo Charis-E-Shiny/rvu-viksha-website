@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
   --background: hsl(240, 10%, 3.9%);
   --foreground: hsl(0, 0%, 98%);
@@ -174,12 +178,18 @@ html {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(135deg,#5691ea, #2261e0);
+  background: #0a192f;   /* dark navy blue */
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(135deg, #7C3AED, #8B5CF6);
+  background: #112240;   /* slightly lighter navy on hover */
+}
+
+/* For Firefox */
+* {
+  scrollbar-color: #0a192f #1a1a2e;
+  scrollbar-width: thin;
 }
 
 /* Text selection */

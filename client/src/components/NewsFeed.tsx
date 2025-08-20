@@ -5,6 +5,7 @@ interface NewsItem {
   title: string;
   url: string;
 }
+const apiKey = import.meta.env.VITE_NEWS_API_KEY;
 
 const NewsFeed: React.FC = () => {
   const [newsItems, setNewsItems] = useState<NewsItem[]>([]);
@@ -16,7 +17,7 @@ const NewsFeed: React.FC = () => {
     async function fetchNews() {
       try {
         const res = await fetch(
-          `https://newsapi.org/v2/everything?q=coding+OR+programming&sortBy=publishedAt&apiKey=7223ba2f209f4122ae6e71def696bef6`
+          `https://newsapi.org/v2/everything?q=coding+OR+programming&sortBy=publishedAt&apiKey=${apiKey}`
         );
         const data = await res.json();
 
