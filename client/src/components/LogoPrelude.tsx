@@ -40,9 +40,10 @@ export default function LogoPrelude({ isVisible, onComplete }: LogoPreludeProps)
         {[...Array(20)].map((_, i) => (
           <div
             key={i}
-            className={`absolute w-1 h-1 bg-purple-400 rounded-full transition-all duration-1000 ${
-              animationStage >= 2 ? 'opacity-100 animate-ping' : 'opacity-0'
-            }`}
+            className={`absolute w-1 h-1 bg-blue-400 rounded-full transition-all duration-1000 ${
+  animationStage >= 2 ? 'opacity-100 animate-ping' : 'opacity-0'
+}`}
+
             style={{
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
@@ -62,9 +63,12 @@ export default function LogoPrelude({ isVisible, onComplete }: LogoPreludeProps)
               : 'scale-100 opacity-100'
             : 'scale-50 opacity-0'
         }`}>
-          <div className={`w-32 h-32 bg-gradient-to-br from-purple-600/20 to-purple-800/40 backdrop-blur-sm border-2 border-purple-500/30 rounded-2xl flex items-center justify-center relative overflow-hidden ${
-            animationStage >= 4 ? 'animate-pulse-glow' : ''
-          }`}>
+          <div
+  className={`w-32 h-32 bg-gradient-to-br from-blue-600/20 to-blue-800/40 backdrop-blur-sm border-2 border-blue-500/30 rounded-2xl flex items-center justify-center relative overflow-hidden ${
+    animationStage >= 4 ? 'animate-pulse-glow' : ''
+  }`}
+>
+
             <img 
               src="/assets/Viksha.jpg" 
               alt="VIKSHA Logo"
@@ -96,20 +100,26 @@ export default function LogoPrelude({ isVisible, onComplete }: LogoPreludeProps)
               : 'scale-100 opacity-100'
             : 'scale-90 opacity-0'
         }`}>
-          <h1 className={`text-4xl lg:text-5xl font-bold mb-2 ${
-            animationStage >= 4 
-              ? 'bg-gradient-to-r from-white via-purple-200 to-white bg-clip-text text-transparent animate-gradient'
-              : 'text-white'
-          }`}>
+          <h1
+  className={`text-4xl lg:text-5xl font-bold mb-2 ${
+    animationStage >= 4
+      ? 'bg-gradient-to-r from-white via-blue-200 to-white bg-clip-text text-transparent animate-gradient'
+      : 'text-white'
+  }`}
+>
+
             VIKSHA CODING CLUB
           </h1>
-          <p className={`text-lg ${
-            animationStage >= 4 
-              ? 'text-purple-300'
-              : 'text-gray-400'
-          } transition-colors duration-500`}>
-            OF RVU
-          </p>
+          <p
+  className={`text-lg ${
+    animationStage >= 4 
+      ? 'text-blue-300'
+      : 'text-gray-400'
+  } transition-colors duration-500`}
+>
+  OF RVU
+</p>
+
         </div>
 
         {/* Tagline */}
@@ -128,9 +138,10 @@ export default function LogoPrelude({ isVisible, onComplete }: LogoPreludeProps)
           {[0, 1, 2].map((i) => (
             <div
               key={i}
-              className={`w-2 h-2 bg-purple-400 rounded-full transition-all duration-300 ${
-                animationStage >= 2 ? 'animate-bounce' : ''
-              }`}
+              className={`w-2 h-2 bg-blue-400 rounded-full transition-all duration-300 ${
+  animationStage >= 2 ? 'animate-bounce' : ''
+}`}
+
               style={{ animationDelay: `${i * 0.2}s` }}
             />
           ))}

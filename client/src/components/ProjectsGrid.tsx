@@ -44,7 +44,8 @@ export default function ProjectsGrid() {
             return (
               <div 
                 key={index}
-                className="bg-purple-gradient rounded-xl p-6 hover:scale-105 transition-transform duration-300"
+               className="bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 rounded-xl p-6 hover:scale-105 transition-transform duration-300"
+
               >
                 <div className="mb-4">
                   <IconComponent size={48} className="text-white opacity-80" />
