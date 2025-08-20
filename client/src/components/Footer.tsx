@@ -23,9 +23,9 @@ export default function Footer() {
         {/* Social Links */}
         <div className="flex space-x-5">
           {[
-            { icon: Instagram, link: "#" },
+            { icon: Instagram, link: "https://www.instagram.com/viksha_rvu" },
             { icon: Linkedin, link: "https://www.linkedin.com/company/viksha/" },
-            { icon: Github, link: "#" }
+            { icon: Github, link: "https://github.com/viksha-club-rvu" }
           ].map(({ icon: Icon, link }, i) => (
             <a 
               key={i} 

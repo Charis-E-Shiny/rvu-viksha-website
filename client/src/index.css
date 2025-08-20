@@ -31,16 +31,17 @@
   --purple-gradient-hover-to: hsl(263, 70%, 60%);
 }
 
-@layer base {
-  * {
-    @apply border-border;
-  }
+* {
+  border-color: var(--border);
+}
 
-  body {
-    @apply font-sans antialiased;
-    background-color: #0a0a0a;
-    color: hsl(var(--foreground));
-  }
+body {
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #0a0a0a;
+  color: hsl(var(--foreground));
+  background: #0a0a0a;
 }
 
 @layer utilities {
@@ -177,12 +178,18 @@ html {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(135deg, #8B5CF6, #A855F7);
+  background: #0a192f;   /* dark navy blue */
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(135deg, #7C3AED, #8B5CF6);
+  background: #112240;   /* slightly lighter navy on hover */
+}
+
+/* For Firefox */
+* {
+  scrollbar-color: #0a192f #1a1a2e;
+  scrollbar-width: thin;
 }
 
 /* Text selection */
