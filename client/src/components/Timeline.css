@@ -132,6 +132,12 @@
   
   letter-spacing: 1px;
 }
+.year.clickable {
+  cursor: pointer;
+  /* transition: transform 0.2s ease, color 0.3s ease; */
+}
+
+
 
 /* glowing fade in/out */
 
